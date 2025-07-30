@@ -1,4 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
+
+
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="grid grid-cols-5 gap-12 p-4 py-20">
       <div className="col-span-3">
@@ -13,7 +18,7 @@ const Home = () => {
           </p>
         </div>
         <div className="">
-          <button className="bg-primary text-white px-24 py-6 rounded hover:opacity-95 transition">
+          <button className="bg-primary text-white px-24 py-6 rounded hover:opacity-95 transition" onClick={() => navigate("/game")}>
             <span className="select-none text-3xl font-semibold">
               Start Game
             </span>
