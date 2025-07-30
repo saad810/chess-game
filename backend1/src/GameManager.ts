@@ -41,10 +41,12 @@ export class GameManager {
                 case MOVE:
                     const game = this.games.find(g => g.player1 === socket || g.player2 === socket);
                     if (game) {
-                        game.makeMove(message.payload);
+                        game.makeMove(socket, message.payload);
                     }
+                    break;
                 default:
                     console.error('Unknown message type:', message.type);
+                    break;
             }
 
         });
