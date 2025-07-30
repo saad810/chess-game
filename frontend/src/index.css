@@ -4,3 +4,10 @@
 /* #302e2b */
 /* #98c75c */
 /* #4d4c49 */
+
+
+@theme {
+  --color-dark-one: #302e2b;
+  --color-primary: #98c75c;
+  --color-dark-two: #4d4c49;
+}
