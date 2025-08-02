@@ -9,6 +9,7 @@ const GamePage = () => {
   const socket = useSocket();
   const [chess, setChess] = useState(new Chess());
   const [board, setBoard] = useState(chess.board());
+  const [started, setStarted] = useState(false);
 
 
   useEffect(() => {
@@ -19,14 +20,14 @@ const GamePage = () => {
         switch (message.type) {
           case INIT_GAME:
             console.log("Game initialized");
-            // initialize the chess
-            setChess(new Chess());
-            // create a new board state
+         
             setBoard(chess.board());
+            setStarted(true);
             break;
           case MOVE:
             // console.log("Move received:", message.data);
             const move = message.payload;
+            console.log("Move received:", move);
             chess.move(move);
             setBoard(chess.board());
             console.log("Move made")
@@ -57,13 +58,15 @@ const GamePage = () => {
   return (
     <section>
       <div className="grid grid-cols-6 gap-12 p-4 py-20">
-        <div className="col-span-4 flex items-center justify-center select-none"><ChessBoard board={board} /></div>
+        <div className="col-span-4 flex items-center justify-center select-none">
+          <ChessBoard board={board} socket={socket} setBoard={setBoard} chess={chess} />
+        </div>
         <div className="col-span-2">
 
           <h1 className="text-2xl font-bold text-white">Game Page</h1>
-          <Button onClick={() => socket.send(JSON.stringify({ type: INIT_GAME }))}>
+          {!started && <Button onClick={() => socket.send(JSON.stringify({ type: INIT_GAME }))}>
             Start New Game
-          </Button>
+          </Button>}
           <div className="mt-4">
             {/* Additional game information or controls can go here */}
           </div>

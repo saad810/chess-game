@@ -41,6 +41,7 @@ export class GameManager {
                 case MOVE:
                     const game = this.games.find(g => g.player1 === socket || g.player2 === socket);
                     if (game) {
+                        console.log("Making move:", message.payload);
                         game.makeMove(socket, message.payload);
                     }
                     break;
